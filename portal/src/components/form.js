@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './form.css'
-
+import axios from 'axios'
 
 
 const Form=()=> {
@@ -16,6 +16,17 @@ const Form=()=> {
     setUser({...user, 
     [name]:value})
   }
+
+  const uploadData=()=>{
+    const {title,description,code} = user;
+    if(title && description && code){
+      alert("posted")
+      // axios.post
+    }
+    else{
+      alert('invalid input')
+    }
+    }
   return (
     <div className='body'>
       {console.log("user" , user)}
@@ -32,7 +43,7 @@ const Form=()=> {
               
               <input type="file" placeholder='upload file' onChange={handleInputChange} />
 
-              <button  className='btn' type='submit'>Upload</button>
+              <button  className='btn' type='submit' onClick={uploadData}>Upload</button>
           </ul>
       </form>
     </div>
