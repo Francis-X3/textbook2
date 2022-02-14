@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+.body{
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(#f97794 ,#623aa2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+.form{
+    width: 350px;
+    box-sizing: border-box;
+    border: 2px solid #623aa2;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    justify-content: space-between;
+    align-items: center;
+    background: wheat;
+    position: absolute;
+}
+
+.form-elements{
+    list-style: none;
+}
+.btn{
+    color: #623aa2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-elements> input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    margin: 5px;
+    
+}
