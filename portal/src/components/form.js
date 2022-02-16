@@ -17,11 +17,13 @@ const Form=()=> {
     [name]:value})
   }
 
-  const uploadData=()=>{
+  const uploadData=(e)=>{
+    e.preventDefault();
     const {title,description,code} = user;
     if(title && description && code){
-      alert("posted")
-      // axios.post
+      
+      axios.post('http://localhost:5004/getdata',user)
+      .then(res => console.log(res))
     }
     else{
       alert('invalid input')
@@ -38,11 +40,10 @@ const Form=()=> {
               <input name='title' value={user.title} placeholder= 'Title' type="text" onChange={handleInputChange}/>
               
               <input name='description' value={user.description} placeholder='Description' type="text" onChange={handleInputChange} />
-              
+             
               <input name='code' value={user.code} placeholder='Your code here' type="text"  onChange={handleInputChange}/>
-              
+         
               <input type="file" placeholder='upload file' onChange={handleInputChange} />
-
               <button  className='btn' type='submit' onClick={uploadData}>Upload</button>
           </ul>
       </form>
