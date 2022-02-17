@@ -2,7 +2,8 @@ const express = require('express')
 const cors = require('cors');
 const mongoose = require('mongoose');
 const { stringify } = require('nodemon/lib/utils');
-
+const jwt = require('jsonwebtoken')
+jwtKey="jwt"
 
 const app = express()
 app.use(express.json())
@@ -16,14 +17,20 @@ mongoose.connect('mongodb://localhost/portalDB',{
     console.log("DB connected")
 })
 
-const userSchema = new mongoose.Schema({
+const entrySchema = new mongoose.Schema({
     title: String,
     description: String,
     code: String,
 })
+const userSchema = new mongoose.Schema({
+    email : String,
+    password:String
+
+})
 
 
-const User = new mongoose.model("User", userSchema)
+const User = new mongoose.model("entries", entrySchema)
+const Entry = new mongoose.model("entries", entrySchema)
 
 
 
@@ -34,16 +41,19 @@ app.post('/', (req,res)=>{
 
 
 
-app.post('/getdata',(req,res)=>{
+app.post('/form',(req,res)=>{
     console.log(req.body)
     
     const {title ,description , code} = req.body
-    const user = new User({
+    const entry = new Entry({
         title:title,
         description:description,
         code:code
     })
-    user.save( err =>{
+    entry.save( err =>{
+        // jwt.sign({result},jwtKey,{expiresIn='500s'},(err,token)=>{
+        //     res.json({token})
+        // })
         if(err){
             res.send(err)
         }
@@ -51,6 +61,22 @@ app.post('/getdata',(req,res)=>{
             res.send({ message: "succesfully updated"})
         }
     })
+})
+
+app.post('/login',(req,res)=>{
+    console.log(req.body)
+    const {email,password} = req.body
+    Entry.findOne({email:email},(err,entries)=>{
+        if(entries){
+            if(password=== entries.password){
+                res.send({message:"Login Succesful",entries:entries})
+            }else{
+                res.send("Check Password")
+            }}else{
+                res.send("user not found")
+            }
+    })
+
 })
 
 app.listen(5004,()=>{
