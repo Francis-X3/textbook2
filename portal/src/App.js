@@ -3,6 +3,7 @@ import './App.css';
 import Form from './components/form'
 import Login from './components/login'
 import Register from './components/register'
+import Home from './components/home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState } from 'react';
 
@@ -16,9 +17,9 @@ function App() {
       <Register /> */}
         <Router>
           <Routes>
-            <Route exact path='/' />
+            <Route exact path='/' element ={<Home />}/>
             <Route exact path='/form' element={<Form />} />
-            /
+            
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/register' element={<Register />} />
           </Routes>
