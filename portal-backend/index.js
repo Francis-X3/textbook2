@@ -26,11 +26,13 @@ const entrySchema = new mongoose.Schema({
     title: String,
     description: String,
     code: String,
+    
 })
 const userSchema = new mongoose.Schema({
     name: String,
     email: String,
     password: String,
+    token:String
 
 })
 
@@ -38,6 +40,10 @@ const userSchema = new mongoose.Schema({
 const User = new mongoose.model("users", userSchema)
 const Entry = new mongoose.model("entries", entrySchema)
 
+const generateToken = (name)=>{
+    return jwt.sign({name },jwtKey,{expiresIn:'30d'})
+
+}
 
 
 app.post('/', (req, res) => {
@@ -75,9 +81,7 @@ app.post('/login', (req, res) => {
     User.findOne({ email: email }, (err, entries) => {
         if (entries) {
             if (password === entries.password) {
-                
-                res.send({ message: "Login Successful", entries: entries })
-                
+                res.send({message:"successfully loged in"})
             } else {
                 res.send("Check Password")
             }
@@ -88,24 +92,27 @@ app.post('/login', (req, res) => {
 
 })
 
-app.post('/register',jsonParser, (req, res) => {
-    var cipher= crypto.createCipheriv(algo,key)
-    var encrypted = cipher.update(req.body.password, 'utf-8','hex')
-    *cipher.final('hex');
-    console.log(req.body , encrypted)
-    const { name, email, password } = req.body
+app.post('/register', (req, res) => {
+    // var cipher= crypto.createCipheriv(algo,key)
+    // var encrypted = cipher.update(req.body.password, 'utf-8','hex')
+    // *cipher.final('hex');
+    console.log(req.body)
+    const { name, email, password, } = req.body
     const user = new User({
         name: name,
         email: email,
         password: password,
+        
     })
     user.save(err => {
         if (err) {
             res.send(err)
         } else {
-            res.send({ message: "succesfully registered" })
+            res.json(user.token)
+
+            }
         }
-    })
+    )
 
 
 
