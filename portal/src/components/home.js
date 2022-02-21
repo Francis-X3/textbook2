@@ -8,7 +8,7 @@ export default function Home() {
       <div className='wrapper'>
     <div className='card'>
       <h1>Welcome</h1>
-      <h4>Login to Access data from the DB</h4>
+      <h4>Login to Access data </h4>
       <button onClick={()=>navigate('./login')}>Login</button>
       <h6>New user?</h6>
       <button onClick={()=>navigate('./register')}>Register</button>
