@@ -12,9 +12,6 @@ function App() {
   return (
     <>
       <div className="App">
-        {/* <Login />
-      <Form />
-      <Register /> */}
         <Router>
           <Routes>
             <Route exact path='/' element ={<Home />}/>
