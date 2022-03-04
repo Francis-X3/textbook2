@@ -109,6 +109,8 @@ app.post('/login',(req, res) => {
         }
     })
 
+})                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
 app.post('/register', (req, res) => {
     // var cipher= crypto.createCipheriv(algo,key)
     // var encrypted = cipher.update(req.body.password, 'utf-8','hex')
