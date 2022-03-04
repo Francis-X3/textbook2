@@ -22,6 +22,13 @@ export default function Login() {
     e.preventDefault();
     axios.post('http://localhost:5004/login', user)
       .then(res => (alert(res.data.message)))
+      const[email,password]=user;
+      if(email===user.email&&password===user.password){
+          
+      }else{
+        console.log( "Check Email or password")
+      }
+
 
   }
 
